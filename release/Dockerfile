@@ -20,8 +20,8 @@ RUN apk update && apk upgrade && apk add bash
 EXPOSE 80
 
 COPY --from=front-builder /build/Q-n-A_UI/dist /usr/share/caddy
-COPY --from=back-builder /Q-n-A .
+COPY --from=back-builder /Q-n-A /
 COPY ./Caddyfile /etc/caddy/Caddyfile
 
 HEALTHCHECK CMD ./Q-n-A healthcheck || exit 1
-ENTRYPOINT caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && ./Q-n-A
+ENTRYPOINT caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && /Q-n-A
