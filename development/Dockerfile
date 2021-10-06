@@ -15,7 +15,8 @@ RUN git clone https://github.com/Q-n-A-dev-team/Q-n-A
 WORKDIR /build/Q-n-A
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /Q-n-A -ldflags '-s -w'
 
-FROM caddy:2.4.5 AS runner
+FROM caddy:2.4.5-alpine AS runner
+RUN apk update && apk upgrade && apk add bash
 EXPOSE 80
 
 COPY --from=front-builder /build/Q-n-A_UI/dist /usr/share/caddy
