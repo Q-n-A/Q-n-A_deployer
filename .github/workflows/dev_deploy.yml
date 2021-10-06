@@ -67,7 +67,7 @@ jobs:
           git config --local user.name "Q'n'A-dev"
       - name: Place showcase.yml on root
         run: |
-          mv development/showcase.yml .
+          mv development/showcase.yaml .
           git commit -a -m "Deploy dev"
       - name: Push on Gitea
         env:
