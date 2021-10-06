@@ -12,9 +12,6 @@ env:
 jobs:
   build:
     name: Build Docker Image
-    strategy:
-      matrix:
-        platform: [linux/amd64, linux/arm64]
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -34,7 +31,7 @@ jobs:
         with:
           context: ./development
           push: true
-          platforms: ${{ matrix.platform }}
+          platforms: linux/amd64, linux/arm64
           tags: ghcr.io/q-n-a-dev-team/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
   scan:
