@@ -1,0 +1,19 @@
+{
+	admin off
+}
+
+:80
+
+encode zstd gzip
+root * /usr/share/caddy
+
+handle /api/* {
+	reverse_proxy localhost:9000
+}
+
+handle {
+	file_server {
+		precompressed zstd gzip
+	}
+	try_files {path} /index.html
+}

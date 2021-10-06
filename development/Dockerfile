@@ -23,4 +23,4 @@ COPY --from=back-builder /Q-n-A .
 COPY ./Caddyfile /etc/caddy/Caddyfile
 
 HEALTHCHECK CMD ./Q-n-A healthcheck || exit 1
-ENTRYPOINT caddy run --config /etc/caddy/Caddyfile --adapter caddyfile && ./Q-n-A
+ENTRYPOINT caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && ./Q-n-A

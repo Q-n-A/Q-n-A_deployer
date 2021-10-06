@@ -6,8 +6,8 @@ entrypoint: ""
 
 http_proxy: 80
 
-cname: [dev.q-n-a.trap.games]
+cname: [q-n-a.trap.games]
 
 https: "hard"
 
-__image: ghcr.io/q-n-a-dev-team/q-n-a_dev:master
+__image: ghcr.io/q-n-a-dev-team/q-n-a_deploy:latest
