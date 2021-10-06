@@ -1,2 +1,3 @@
-# dev-deploy
-Q'n'A Deploy Scripts for Staging Environment on Showcase
+# Q-n-A_deployer
+
+Q'n'A Deploy Scripts for Showcase
