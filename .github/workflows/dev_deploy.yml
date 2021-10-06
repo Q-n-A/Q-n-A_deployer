@@ -72,4 +72,4 @@ jobs:
       - name: Push on Gitea
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
-        run: gut push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git master
+        run: git push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git master
