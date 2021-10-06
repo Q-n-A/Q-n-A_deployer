@@ -2,11 +2,12 @@ type: "runtime"
 
 use_mariadb: true
 
-entrypoint: ""
+entrypoint: caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && /Q-n-A
 
 http_proxy: 80
 
-cname: [q-n-a.trap.games]
+cname:
+  - q-n-a.trap.games
 
 https: "hard"
 
