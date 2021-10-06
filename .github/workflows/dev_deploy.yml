@@ -68,7 +68,8 @@ jobs:
       - name: Place showcase.yml on root
         run: |
           mv development/showcase.yaml .
-          git commit -a -m "Deploy dev"
+          git add .
+          git commit -m "Deploy dev"
       - name: Push on Gitea
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
