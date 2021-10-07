@@ -8,6 +8,7 @@ on:
 env:
   IMAGE_NAME: q-n-a_deploy
   IMAGE_TAG: master
+  ENVIRONMENT: development
 
 jobs:
   build:
@@ -53,7 +54,7 @@ jobs:
     name: Push on traP Git
     runs-on: ubuntu-latest
     environment:
-      name: Development
+      name: ${{ env.ENVIRONMENT }}
       url: https://dev-q-n-a.trap.games/
     needs: [build]
     steps:
@@ -67,7 +68,7 @@ jobs:
           git config --local user.name "Q'n'A-dev"
       - name: Place showcase.yml on root
         run: |
-          mv development/showcase.yaml .
+          mv ${{ env.ENVIRONMENT }}/showcase.yaml .
           git add .
           git commit -m "Deploy dev"
       - name: Push on traP Git
