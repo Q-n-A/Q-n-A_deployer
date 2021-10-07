@@ -50,16 +50,19 @@ jobs:
           image-name: ghcr.io/q-n-a-dev-team/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
   deploy:
-    name: Push on Gitea
+    name: Push on traP Git
     runs-on: ubuntu-latest
+    environment:
+      name: Development
+      url: https://dev-q-n-a.trap.games/
     needs: [build]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
         run: |
-          echo "${{ secrets.DEV_DEPLOY_KEY }}" > ~/deploy_key.pem
-          chmod 600 ~/deploy_key.pem
+          echo "${{ secrets.DEPLOY_KEY }}" > ~/deploy_key
+          chmod 600 ~/deploy_key
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "Q'n'A-dev"
       - name: Place showcase.yml on root
@@ -67,9 +70,9 @@ jobs:
           mv development/showcase.yaml .
           git add .
           git commit -m "Deploy dev"
-      - name: Push on Gitea
+      - name: Push on traP Git
         env:
-          GIT_SSH_COMMAND: ssh -i ~/deploy_key.pem -o StrictHostKeyChecking=no -F /dev/null
+          GIT_SSH_COMMAND: ssh -i ~/deploy_key -o StrictHostKeyChecking=no -F /dev/null
         run: |
           git fetch --unshallow origin
           git push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git master
