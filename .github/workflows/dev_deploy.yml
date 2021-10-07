@@ -54,7 +54,7 @@ jobs:
     name: Push on traP Git
     runs-on: ubuntu-latest
     environment:
-      name: ${{ env.ENVIRONMENT }}
+      name: development
       url: https://dev-q-n-a.trap.games/
     needs: [build]
     steps:
