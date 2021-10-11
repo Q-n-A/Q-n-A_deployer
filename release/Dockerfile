@@ -7,7 +7,7 @@ WORKDIR /build/Q-n-A_UI
 RUN npm ci --unsafe-perm
 RUN npm run build
 
-FROM golang:1.17.1-alpine AS back-builder
+FROM golang:1.17.2-alpine AS back-builder
 WORKDIR /build
 RUN apk add git
 
