@@ -3,11 +3,11 @@ name: dev_deploy
 on:
   push:
     branches:
-      - master
+      - main
 
 env:
   IMAGE_NAME: q-n-a_deploy
-  IMAGE_TAG: master
+  IMAGE_TAG: main
   ENVIRONMENT: development
 
 jobs:
