@@ -14,4 +14,4 @@ https: "hard"
 branch:
   main: null
 
-__image: ghcr.io/q-n-a-dev-team/q-n-a_deploy:master
+__image: ghcr.io/q-n-a-dev-team/q-n-a_deploy:main
