@@ -75,4 +75,5 @@ jobs:
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key -o StrictHostKeyChecking=no -F /dev/null
         run: |
-          git push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git master
+          git fetch --unshallow origin
+          git push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git main
