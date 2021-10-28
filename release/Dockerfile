@@ -1,4 +1,4 @@
-FROM node:16.12.0-alpine AS front-builder
+FROM node:17.0.1-alpine AS front-builder
 WORKDIR /build
 RUN apk add git
 
