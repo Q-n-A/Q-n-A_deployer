@@ -1,5 +1,4 @@
-name: dev_deploy
-
+name: CD
 on:
   push:
     branches:
@@ -33,7 +32,7 @@ jobs:
           context: ./development
           push: true
           platforms: linux/amd64, linux/arm64
-          tags: ghcr.io/q-n-a-dev-team/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          tags: ghcr.io/q-n-a/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
   scan:
     name: Scan Image Vulnerability
@@ -43,37 +42,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Pull docker image
-        run: docker pull ghcr.io/q-n-a-dev-team/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+        run: docker pull ghcr.io/q-n-a/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
       - name: Container image scan
         uses: Azure/container-scan@v0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          image-name: ghcr.io/q-n-a-dev-team/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          image-name: ghcr.io/q-n-a/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
 
   deploy:
     name: Push on traP Git
     runs-on: ubuntu-latest
-    environment:
-      name: development
-      url: https://dev-q-n-a.trap.games/
     needs: [build]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup
         run: |
-          echo "${{ secrets.DEPLOY_KEY }}" > ~/deploy_key
+          echo "${{ secrets.DEPLOY_KEY_GITEA }}" > ~/deploy_key
           chmod 600 ~/deploy_key
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-          git config --local user.name "Q'n'A-dev"
-      - name: Place showcase.yml on root
-        run: |
-          mv ${{ env.ENVIRONMENT }}/showcase.yaml .
-          git add .
-          git commit -m "Deploy dev"
+          git config --local user.name "Q-n-A"
       - name: Push on traP Git
         env:
           GIT_SSH_COMMAND: ssh -i ~/deploy_key -o StrictHostKeyChecking=no -F /dev/null
         run: |
           git fetch --unshallow origin
-          git push -f ssh://git@git.trap.jp:2200/Q-n-A-dev-team/Q-n-A_dev.git main
+          git push -f ssh://git@git.trap.jp:2200/Q-n-A/Q-n-A.git main
