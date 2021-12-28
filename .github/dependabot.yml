@@ -6,12 +6,7 @@
 version: 2
 updates:
   - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/development" # Location of package manifests
-    schedule:
-      interval: "daily"
-
-  - package-ecosystem: "docker" # See documentation for possible values
-    directory: "/release" # Location of package manifests
+    directory: "/" # Location of package manifests
     schedule:
       interval: "daily"
 
