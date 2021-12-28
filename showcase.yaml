@@ -5,10 +5,10 @@ http_proxy: 80
 https: "hard"
 branch:
   main:
-    __image: ghcr.io/q-n-a-dev-team/q-n-a_deploy:main
+    __image: ghcr.io/q-n-a/q-n-a_deploy:main
     cname:
       - dev-q-n-a.trap.games
   release:
-    __image: ghcr.io/q-n-a-dev-team/q-n-a_deploy:latest
+    __image: ghcr.io/q-n-a/q-n-a_deploy:latest
     cname:
       - q-n-a.trap.games
