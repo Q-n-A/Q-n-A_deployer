@@ -2,7 +2,7 @@ FROM node:16.13.1-alpine AS front-builder
 WORKDIR /build
 RUN apk add git
 
-RUN git clone https://github.com/Q-n-A-dev-team/Q-n-A_UI
+RUN git clone https://github.com/Q-n-A/Q-n-A_UI
 WORKDIR /build/Q-n-A_UI
 RUN npm ci --unsafe-perm
 RUN npm run build
@@ -11,7 +11,7 @@ FROM golang:1.17.5-alpine AS back-builder
 WORKDIR /build
 RUN apk add git
 
-RUN git clone https://github.com/Q-n-A-dev-team/Q-n-A
+RUN git clone https://github.com/Q-n-A/Q-n-A
 WORKDIR /build/Q-n-A
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /Q-n-A -ldflags '-s -w'
 
