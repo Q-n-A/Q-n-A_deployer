@@ -9,7 +9,7 @@ RUN npm run build
 
 FROM logica0419/protoc-go:1.1.0 AS back-builder
 WORKDIR /build
-RUN apk add git
+RUN apt-get update && apt-get install git
 
 RUN git clone https://github.com/Q-n-A/Q-n-A
 WORKDIR /build/Q-n-A
