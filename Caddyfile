@@ -11,6 +11,10 @@ handle /api/* {
 	reverse_proxy localhost:9000
 }
 
+handle /grpc {
+	reverse_proxy localhost:9000
+}
+
 handle {
 	file_server {
 		precompressed zstd gzip
