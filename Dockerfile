@@ -16,13 +16,18 @@ WORKDIR /build/Q-n-A
 RUN make grpc-go
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /Q-n-A -ldflags '-s -w'
 
-FROM caddy:2.4.6-alpine AS runner
-RUN apk update && apk upgrade && apk add bash
-EXPOSE 80
+FROM caddy:2.4.6-alpine AS caddy
 
-COPY --from=front-builder /build/Q-n-A_UI/dist /usr/share/caddy
+FROM envoyproxy/envoy-alpine:v1.20.1 AS runner
+RUN apk update && apk upgrade && apk add bash
+EXPOSE 8080
+
+COPY --from=front-builder /build/Q-n-A_UI/dist /usr/share/caddy/
 COPY --from=back-builder /Q-n-A /
-COPY ./Caddyfile /etc/caddy/Caddyfile
+COPY --from=caddy /usr/bin/caddy /usr/bin/
+COPY ./settings/Caddyfile /etc/caddy/
+COPY ./settings/envoy.yaml /etc/envoy/
+COPY ./settings/entrypoint.sh /
 
 HEALTHCHECK --interval=60s --timeout=3s --retries=5 CMD ./Q-n-A healthcheck || exit 1
-ENTRYPOINT caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && /Q-n-A serve
+ENTRYPOINT sh /entrypoint.sh
