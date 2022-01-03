@@ -1,6 +1,6 @@
 type: "runtime"
 use_mariadb: true
-entrypoint: caddy start --config /etc/caddy/Caddyfile --adapter caddyfile && /Q-n-A serve
+entrypoint: sh /entrypoint.sh
 http_proxy: 8080
 https: "hard"
 branch:
