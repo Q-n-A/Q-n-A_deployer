@@ -1,10 +1,11 @@
-FROM node:16.13.1-alpine AS front-builder
+FROM logica0419/protoc-node:16.13.1 AS front-builder
 WORKDIR /build
 RUN apk add git
 
 RUN git clone https://github.com/Q-n-A/Q-n-A_UI
 WORKDIR /build/Q-n-A_UI
 RUN npm ci --unsafe-perm
+RUN npm run gen
 RUN npm run build
 
 FROM logica0419/protoc-go:1.1.0 AS back-builder
