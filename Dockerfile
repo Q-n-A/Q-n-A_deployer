@@ -8,7 +8,7 @@ RUN npm ci --unsafe-perm
 RUN npm run gen
 RUN npm run build
 
-FROM logica0419/protoc-go:1.17.5 AS back-builder
+FROM logica0419/protoc-go:1.17.6 AS back-builder
 WORKDIR /build
 RUN apt-get update && apt-get install git
 
