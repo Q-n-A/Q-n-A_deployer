@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /Q-n-A -ldflags '-s -w'
 
 FROM caddy:2.4.6-alpine AS caddy
 
-FROM envoyproxy/envoy-alpine:v1.20.1 AS runner
+FROM envoyproxy/envoy-alpine:v1.21.0 AS runner
 RUN apk update && apk upgrade && apk add bash
 EXPOSE 8080
 
