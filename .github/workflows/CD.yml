@@ -1,8 +1,8 @@
 name: CD
 on:
   push:
-    branches:
-      - main
+    paths:
+      - "deploy-log/**"
 
 env:
   IMAGE_NAME: q-n-a_deploy
