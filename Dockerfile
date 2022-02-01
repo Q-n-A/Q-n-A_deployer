@@ -1,4 +1,4 @@
-FROM logica0419/protoc-node:16.13.1 AS front-builder
+FROM logica0419/protoc-node:16.13.2 AS front-builder
 WORKDIR /build
 RUN apt-get update && apt-get install git
 
@@ -8,7 +8,7 @@ RUN npm ci --unsafe-perm
 RUN npm run gen
 RUN npm run build
 
-FROM logica0419/protoc-go:1.1.0 AS back-builder
+FROM logica0419/protoc-go:1.17.6 AS back-builder
 WORKDIR /build
 RUN apt-get update && apt-get install git
 
@@ -19,7 +19,7 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o /Q-n-A -ldflags '-s -w'
 
 FROM caddy:2.4.6-alpine AS caddy
 
-FROM envoyproxy/envoy-alpine:v1.20.1 AS runner
+FROM envoyproxy/envoy-alpine:v1.21.0 AS runner
 RUN apk update && apk upgrade && apk add bash
 EXPOSE 8080
 
