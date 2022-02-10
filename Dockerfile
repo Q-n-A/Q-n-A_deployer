@@ -1,4 +1,4 @@
-FROM logica0419/protoc-node:16.13.2 AS front-builder
+FROM logica0419/protoc-node:16.14.0 AS front-builder
 WORKDIR /build
 RUN apt-get update && apt-get install git
 
