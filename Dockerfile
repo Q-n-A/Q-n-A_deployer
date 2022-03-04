@@ -1,4 +1,4 @@
-FROM node:16.14.0 AS front-builder
+FROM node:16.14.0 AS protoc
 WORKDIR /temp
 
 RUN apt-get update && apt-get install jq unzip -y --no-install-recommends
@@ -9,6 +9,11 @@ RUN URI=$(wget -O - -q https://api.github.com/repos/protocolbuffers/protobuf/rel
   wget --progress=dot:giga "$URI" -O "protobuf.zip" && \
   unzip -o protobuf.zip -d protobuf && \
   chmod -R 755 protobuf/*
+
+FROM node:16.14.0 AS front-builder
+WORKDIR /temp
+
+COPY --from=protoc /temp/protobuf /temp/protobuf/
 ENV PATH $PATH:/temp/protobuf/bin
 
 RUN git clone https://github.com/Q-n-A/Q-n-A_UI
@@ -22,7 +27,7 @@ WORKDIR /temp
 
 RUN apt-get update && apt-get install jq unzip -y --no-install-recommends
 
-COPY --from=front-builder /temp/protobuf /temp/protobuf/
+COPY --from=protoc /temp/protobuf /temp/protobuf/
 ENV PATH $PATH:/temp/protobuf/bin
 
 RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@latest && \
