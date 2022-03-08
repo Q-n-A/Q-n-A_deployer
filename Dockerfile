@@ -1,4 +1,4 @@
-FROM golang:1.17.7 AS back-builder
+FROM golang:1.17.8 AS back-builder
 ARG TARGETARCH
 WORKDIR /temp
 
