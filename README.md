@@ -1,5 +1,8 @@
 # Q-n-A_deployer
 
+[![CI Pipeline](https://github.com/Q-n-A/Q-n-A_deployer/actions/workflows/CI.yml/badge.svg)](https://github.com/Q-n-A/Q-n-A_deployer/actions/workflows/CI.yml)
+[![CD Pipeline](https://github.com/Q-n-A/Q-n-A_deployer/actions/workflows/CD.yml/badge.svg)](https://github.com/Q-n-A/Q-n-A_deployer/actions/workflows/CD.yml)
+
 Q'n'A Deploy Scripts on Showcase
 
 ## 各ファイルの説明
