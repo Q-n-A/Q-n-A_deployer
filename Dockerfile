@@ -34,7 +34,7 @@ RUN npm ci --unsafe-perm && \
   npm run gen && \
   npm run build
 
-FROM caddy:2.4.6-alpine AS caddy
+FROM caddy:2.5.0-alpine AS caddy
 
 FROM envoyproxy/envoy-alpine:v1.21.1 AS runner
 RUN apk add --no-cache  bash
