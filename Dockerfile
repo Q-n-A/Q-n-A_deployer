@@ -36,7 +36,7 @@ RUN npm ci --unsafe-perm && \
 
 FROM caddy:2.4.6-alpine AS caddy
 
-FROM envoyproxy/envoy-alpine:v1.21.1 AS runner
+FROM envoyproxy/envoy-alpine:v1.21.3 AS runner
 RUN apk add --no-cache  bash
 
 COPY --from=front-builder /temp/Q-n-A_UI/dist /usr/share/caddy/
