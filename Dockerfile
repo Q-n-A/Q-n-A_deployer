@@ -22,7 +22,7 @@ RUN go mod download && \
   make grpc-go && \
   CGO_ENABLED=0 GOOS=linux GOARCH="$TARGETARCH" go build -o /Q-n-A -ldflags '-s -w'
 
-FROM node:16.14.2 AS front-builder
+FROM node:18.4.0 AS front-builder
 WORKDIR /temp
 
 COPY --from=back-builder /temp/protobuf /temp/protobuf/
